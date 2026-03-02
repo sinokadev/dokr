@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+import shutil
+
+if shutil.which("docker") is None:
+    print("Error: Docker is not installed or not in PATH.")
+    sys.exit(1)
+
+if len(sys.argv) < 2:
+    print("Using: dokr <command>")
+    sys.exit(1)
+
+cmd_arg = sys.argv[1]
+
+cmd_list = {
+    "cdu": ["compose down", "compose up -d"]
+}
+
+cmds = cmd_list.get(cmd_arg)
+if cmds is not None:
+    for cmd in cmds:
+        result = subprocess.run(["sudo", "docker"] + cmd.split(),
+                                capture_output=True, text=True)
+        if result.returncode != 0:
+            print(result.stderr)
+            sys.exit(result.returncode)
+else:
+    print("unknown command:", cmd_arg)
