@@ -14,7 +14,10 @@ if len(sys.argv) < 2:
 cmd_arg = sys.argv[1]
 
 cmd_list = {
-    "cdu": ["compose down", "compose up -d"]
+    "cdu": ["compose down", "compose up -d"],
+    "cd": ["compose down"],
+    "cdv": ["compose down -v"],
+    "cud": ["compose up -d"],
 }
 
 cmds = cmd_list.get(cmd_arg)
