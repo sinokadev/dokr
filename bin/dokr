@@ -20,6 +20,10 @@ cmd_list = {
     "cud": ["compose up -d"],
 }
 
+if cmd_arg == "install_testing":
+    print("installed")
+    sys.exit(0)
+
 cmds = cmd_list.get(cmd_arg)
 if cmds is not None:
     for cmd in cmds:

@@ -43,4 +43,8 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
     echo "export PATH=\"$BIN_DIR:\$PATH\""
 fi
 
-echo "dokr installed successfully! You can now run 'dokr' from anywhere."
+if "$BIN_DIR/dokr" install_testing 2>/dev/null | grep -q "installed"; then
+    echo "dokr installed successfully! You can now run 'dokr' from anywhere."
+else
+    echo "Warning: install_testing failed. Please check your dokr installation."
+fi
